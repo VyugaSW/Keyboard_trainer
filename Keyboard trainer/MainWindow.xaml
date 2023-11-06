@@ -1,0 +1,303 @@
+﻿<Window x:Class="Keyboard_trainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Keyboard_trainer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="900" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!-- Settings -->
+        <Grid Grid.Row="0">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Buttons Start, Stop and setting like Difficult and Case sensetive-->
+            <Grid Grid.Column="2">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.7*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+               
+
+                <!-- Case sensetive -->
+                <CheckBox Content="Case sensetive" Style="{StaticResource StyleTextButtonGame}"
+                          Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
+                
+                
+                <!-- Buttons -->
+                <Button x:Name="StartButton" Content="Start"  Style="{StaticResource StyleButtonGame}"
+                        Grid.Row="1" Grid.Column="0" 
+                        Click="StartButton_Click" />
+                
+                <Button x:Name="StopButton" Content="Stop" Style="{StaticResource StyleButtonGame}"
+                        Grid.Row="1" Grid.Column="1" IsEnabled="False" Click="StopButton_Click"/>
+                
+                 <!-- Difficulty slider -->
+                <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Style="{StaticResource StyleTextButtonGame}">
+                    <Run> Difficult </Run>
+                    <Run Text="{Binding TextViewModel.DifficultModel.Difficulty}"/>
+                </TextBlock>
+                              
+                <Slider x:Name="Slider" Width="150" Grid.Row="0" Grid.Column="0" 
+                        Minimum="2" Maximum="5" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True"  
+                        Value="{Binding TextViewModel.DifficultModel.Difficulty}" 
+                        HorizontalAlignment="Right" VerticalAlignment="Center" ValueChanged="Slider_ValueChanged"/>
+                
+            </Grid>
+
+            <!-- Fails and Speed -->
+            <TextBlock Grid.Column="1"  Style="{StaticResource StyleTextButtonGame}">
+                <Run> Fails: </Run>
+                <Run Text="{Binding StatisticViewModel.StatisticModel.Fails}"/>
+            </TextBlock>
+
+            <TextBlock Grid.Column="0" Style="{StaticResource StyleTextButtonGame}">
+                <Run>Speed:    </Run>
+                <Run Text="{Binding StatisticViewModel.StatisticModel.Speed}"/>
+                <Run>chars/min</Run>
+            </TextBlock>
+            
+        </Grid>
+
+        <!-- Field of input and output text-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBox x:Name="ReInputText" Foreground="Transparent" Text="{Binding TextViewModel.TextModel.InputText}"
+                         Style="{StaticResource TextBoxStyleCorrect}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBox x:Name="InputText" Text="{Binding TextViewModel.TextModel.InputText}"
+                         Style="{StaticResource TextBoxStyleCorrect}"/>
+            </StackPanel>
+
+            <TextBlock x:Name="OutputText" Grid.Row="0" Text="{Binding TextViewModel.TextModel.OutputText}"
+                       Style="{StaticResource TextFont}"/>
+            
+        </Grid>
+        
+        <!-- Keyboard -->
+        <Grid x:Name="GridKeyboard" Grid.Row="2">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!-- First line of keys-->
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="Oem3" Grid.Column="0" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="D1" Grid.Column="1" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="D2" Grid.Column="2" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="D3" Grid.Column="3" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="D4" Grid.Column="4" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="D5" Grid.Column="5" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="D6" Grid.Column="6" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="D7" Grid.Column="7" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="D8" Grid.Column="8" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="D9" Grid.Column="9" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="D0" Grid.Column="10" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="OemMinus" Grid.Column="11" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="OemPlus" Grid.Column="12" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="Back" Grid.Column="13" Grid.ColumnSpan="14" Style="{StaticResource StyleButtonModifier}"/>
+
+            </Grid>
+
+            <!-- Second line of keys-->
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="Tab" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="Q" Grid.Column="2" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="W" Grid.Column="3" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="E" Grid.Column="4" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="R" Grid.Column="5" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="T" Grid.Column="6" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="Y" Grid.Column="7" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="U" Grid.Column="8" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="I" Grid.Column="9" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="O" Grid.Column="10" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="P" Grid.Column="11" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="OemOpenBrackets" Grid.Column="12" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="Oem6" Grid.Column="13" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="Oem5" Grid.Column="14" Grid.ColumnSpan="14" Style="{StaticResource StyleButtonKeyGreen}"/>
+
+            </Grid>
+
+            <!-- Third line of keys-->
+            <Grid Grid.Row="2">
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="Capital" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="A" Grid.Column="2" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="S" Grid.Column="3" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="D" Grid.Column="4" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="F" Grid.Column="5" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="G" Grid.Column="6" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="H" Grid.Column="7" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="J" Grid.Column="8" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="K" Grid.Column="9" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="L" Grid.Column="10" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="Oem1" Grid.Column="11" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="OemQuotes" Grid.Column="12" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="Return" Grid.Column="13" Grid.ColumnSpan="14" Style="{StaticResource StyleButtonModifier}"/>
+
+            </Grid>
+
+            <!-- Fouth line of keys-->
+            <Grid Grid.Row="3">
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="LeftShift" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="Z" Grid.Column="3" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="X" Grid.Column="4" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="C" Grid.Column="5" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="V" Grid.Column="6" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="B" Grid.Column="7" Style="{StaticResource StyleButtonKeyBlue}"/>
+                <Button Name="N" Grid.Column="8" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="M" Grid.Column="9" Style="{StaticResource StyleButtonKeyViolet}"/>
+                <Button Name="OemComma" Grid.Column="10" Style="{StaticResource StyleButtonKeyRed}"/>
+                <Button Name="OemPeriod" Grid.Column="11" Style="{StaticResource StyleButtonKeyKhaki}"/>
+                <Button Name="OemQuestion" Grid.Column="12" Style="{StaticResource StyleButtonKeyGreen}"/>
+                <Button Name="RightShift" Grid.Column="13" Grid.ColumnSpan="14" Style="{StaticResource StyleButtonModifier}"/>
+
+            </Grid>
+
+            <!-- Fifth line of keys-->
+            <Grid Grid.Row="4">
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Name="LeftCtrl" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="LWin" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="Alt" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="Space" Grid.Column="6" Grid.ColumnSpan="8" Style="{StaticResource StyleButtonSpace}"/>
+                <Button Name="RightAlt" Grid.Column="14" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="RWin" Grid.Column="16" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="RightCtrl" Grid.Column="18" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+
+            </Grid>
+
+        </Grid>
+        
+    </Grid>
+</Window>
