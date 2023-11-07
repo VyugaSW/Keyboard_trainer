@@ -71,33 +71,50 @@ namespace Keyboard_trainer
             }
         }
 
-        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void CapitalChange(Key key, bool addCaps)
         {
-            if (ButtonViewModel.IsCapitalOrShift(e.Key)) // CapsLock and Shift
+            if (addCaps)
             {
-                _capsLock = !_capsLock;
-                ButtonViewModel.ButtonContentInit(_capsLock);
+                if (ButtonViewModel.IsCapitalOrShift(key))
+                {
+                    _capsLock = !_capsLock;
+                    ButtonViewModel.ButtonContentInit(_capsLock);
+                }
             }
+            else
+            {
+                if (ButtonViewModel.IsShift(key))
+                {
+                    _capsLock = !_capsLock;
+                    ButtonViewModel.ButtonContentInit(_capsLock);
+                }
+            }
+        }
 
+        private void CorrectCheck(Key key)
+        {
             try
             {
-                if (!TextViewModel.IsCorrect(ButtonViewModel.GiveKeyCharSpaceSymbol(e.Key)))
+                if (!TextViewModel.IsCorrect(ButtonViewModel.GiveKeyCharSpaceSymbol(key)))
                     StatisticViewModel.StatisticModel.Fails++;
             }
             catch { }
+        }
 
-            TextViewModel.ChangeInputText(ButtonViewModel.GiveKeyCharSpaceSymbol(e.Key));
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Key key = e.Key;
+
+            CapitalChange(key, true);
+            CorrectCheck(key);
+            TextViewModel.ChangeInputText(ButtonViewModel.GiveKeyCharSpaceSymbol(key));
 
             End();
         }
 
         private void Window_PreviewKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
-            {
-                _capsLock = !_capsLock;
-                ButtonViewModel.ButtonContentInit(_capsLock);
-            }
+            CapitalChange(e.Key, false);
         }
 
         private void CalculateSpeed()

@@ -67,6 +67,8 @@ namespace Keyboard_trainer.ViewModels
 
         public bool IsCapitalOrShift(Key key) => (key == Key.Capital || key == Key.LeftShift || key == Key.RightShift) ? true : false;
 
+        public bool IsShift(Key key) => (key == Key.LeftShift || key == Key.RightShift) ? true : false;
+
         public string GiveKeyCharSpaceSymbol(Key key)
         {
             if (IsCapitalOrShift(key))
