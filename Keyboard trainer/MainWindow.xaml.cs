@@ -105,6 +105,8 @@ namespace Keyboard_trainer
         {
             Key key = e.Key;
 
+            SearchKeyName(key).Focus();
+
             CapitalChange(key, true);
             CorrectCheck(key);
             TextViewModel.ChangeInputText(ButtonViewModel.GiveKeyCharSpaceSymbol(key));
@@ -124,6 +126,19 @@ namespace Keyboard_trainer
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += (s, args) => StatisticViewModel.StatisticModel.Speed = InputText.Text.Length / ((int)stopwatch.Elapsed.TotalMinutes + 1);
             dispatcherTimer.Start();
+        }
+
+        private Button SearchKeyName(Key key)
+        {
+            foreach(Grid subGrid in GridKeyboard.Children)
+            {
+                foreach(Button button in subGrid.Children)
+                {
+                    if (key.ToString() == button.Name)
+                        return button;
+                }  
+            }
+            return null;
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -149,7 +164,7 @@ namespace Keyboard_trainer
 
             PreviewKeyDown -= Window_PreviewKeyDown;
             PreviewKeyUp -= Window_PreviewKeyUp;
-        }    
+        }
 
     }
 }

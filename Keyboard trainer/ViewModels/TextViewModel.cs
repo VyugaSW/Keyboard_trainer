@@ -82,8 +82,12 @@ namespace Keyboard_trainer.ViewModels
         {
             if (key == "BACKSPACE")
             {
-                _curIndex -= 2;
-                TextModel.InputText = TextModel.InputText.Remove(TextModel.InputText.Length - 1);
+                try
+                {
+                    _curIndex -= 2;
+                    TextModel.InputText = TextModel.InputText.Remove(TextModel.InputText.Length - 1);
+                }
+                catch (Exception) { }
             }
             else
                 TextModel.InputText += key;

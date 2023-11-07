@@ -80,8 +80,8 @@ namespace Keyboard_trainer.ViewModels
             else if (key == Key.Back)
                 return "BACKSPACE";
 
-            else if (key != Key.LeftAlt || key != Key.RightAlt || key != Key.Return || 
-                    key != Key.RWin || key != Key.LWin || key != Key.Tab || key != Key.LeftCtrl || key != Key.RightCtrl)
+            else if (key != Key.LeftAlt && key != Key.RightAlt && key != Key.Return &&
+                    key != Key.RWin && key != Key.LWin && key != Key.Tab && key != Key.LeftCtrl && key != Key.RightCtrl)
                 return ButtonPressDown(key);
 
             return null;

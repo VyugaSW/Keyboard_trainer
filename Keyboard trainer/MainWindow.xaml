@@ -40,8 +40,7 @@
                 <!-- Case sensetive -->
                 <CheckBox Content="Case sensetive" Style="{StaticResource StyleTextButtonGame}"
                           Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
-                
-                
+                          
                 <!-- Buttons -->
                 <Button x:Name="StartButton" Content="Start"  Style="{StaticResource StyleButtonGame}"
                         Grid.Row="1" Grid.Column="0" 
@@ -289,7 +288,7 @@
 
                 <Button Name="LeftCtrl" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
                 <Button Name="LWin" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
-                <Button Name="Alt" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
+                <Button Name="LeftAlt" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
                 <Button Name="Space" Grid.Column="6" Grid.ColumnSpan="8" Style="{StaticResource StyleButtonSpace}"/>
                 <Button Name="RightAlt" Grid.Column="14" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
                 <Button Name="RWin" Grid.Column="16" Grid.ColumnSpan="2" Style="{StaticResource StyleButtonModifier}"/>
